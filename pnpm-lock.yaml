@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@guyven/mithril-helpers':
+    specifier: bitbucket:GunnerGuyven/mithril-helpers
+    version: bitbucket.org/GunnerGuyven/mithril-helpers/48106ce558a6f7c32ae7588114e3cb5f01bf76bc(mithril@2.2.2)
   '@tauri-apps/api':
     specifier: ^1.2.0
     version: 1.2.0
@@ -1058,3 +1061,16 @@ packages:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
     dev: true
+
+  bitbucket.org/GunnerGuyven/mithril-helpers/48106ce558a6f7c32ae7588114e3cb5f01bf76bc(mithril@2.2.2):
+    resolution: {tarball: https://bitbucket.org/GunnerGuyven/mithril-helpers/get/48106ce558a6f7c32ae7588114e3cb5f01bf76bc.tar.gz}
+    id: bitbucket.org/GunnerGuyven/mithril-helpers/48106ce558a6f7c32ae7588114e3cb5f01bf76bc
+    name: '@guyven/mithril-helpers'
+    version: 0.2.0
+    prepare: true
+    requiresBuild: true
+    peerDependencies:
+      mithril: ^2.2.2
+    dependencies:
+      mithril: 2.2.2
+    dev: false

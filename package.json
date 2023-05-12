@@ -21,6 +21,7 @@
     "vite": "^4.2.0"
   },
   "dependencies": {
+    "@guyven/mithril-helpers": "bitbucket:GunnerGuyven/mithril-helpers",
     "@tauri-apps/api": "^1.2.0",
     "mithril": "^2.2.2"
   }

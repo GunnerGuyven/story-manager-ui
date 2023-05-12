@@ -1,0 +1,8 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    "[cC]lass.*\\s*(?:=|:)\\s*(?:`([^`]*)`|\"([^\"]*)\"|'([^']*)')"
+    // unescaped: [cC]lass.*\s*(?:=|:)\s*(?:`([^`]*)`|"([^"]*)"|'([^']*)')
+    // if a variable has 'class' in the name, and is a string literal
+    // treat the contents of that string as an html class attribute body
+  ]
+}
