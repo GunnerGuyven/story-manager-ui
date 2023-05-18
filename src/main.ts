@@ -6,7 +6,7 @@ import typescriptLogo from "./typescript.svg"
 import mithriljsLogo from "./mithriljslogo.svg"
 import viteLogo from "/vite.svg"
 import { setupCounter } from "./counter"
-import { Editor } from "./editor"
+import { Editor, EditorState } from "./editor"
 
 const btnClass = `py-2 px-4 mx-2
 border-2 border-solid rounded-md 
@@ -19,35 +19,53 @@ const logoClass = `
   hover:drop-shadow-[0_0_2em_rgba(100,108,255,170)]
 `
 
+const appState: { editor: EditorState } = import.meta.hot?.data.appState || {
+  editor: { text: "abcdef" },
+}
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(data => (data.appState = appState))
+  import.meta.hot.accept(module => {
+    if (module) {
+      console.log(module)
+      module.AppRender(_mountNode)
+    }
+  })
+}
+
 const App: m.ClosureComponent = () => {
   let handlerResponse = ""
   return {
     view: () => {
       return m(
         "",
-        m(Editor),
+        m(Editor, { stateContainer: appState.editor }),
         m(
-          "a",
-          { href: "https://vitejs.dev", target: "_blank" },
-          m("img", { class: logoClass, src: viteLogo, alt: "Vite logo" })
-        ),
-        m(
-          "a",
-          { href: "https://www.typescriptlang.org", target: "_blank" },
-          m("img.vanilla", {
-            class: logoClass,
-            src: typescriptLogo,
-            alt: "TypeScript logo",
-          })
-        ),
-        m(
-          "a",
-          { href: "https://mithril.js.org", target: "_blank" },
-          m("img.logo", {
-            class: logoClass,
-            src: mithriljsLogo,
-            alt: "Mithril logo",
-          })
+          "",
+          { class: "flex my-4" },
+          m(
+            "a",
+            { href: "https://vitejs.dev", target: "_blank" },
+            m("img", { class: logoClass, src: viteLogo, alt: "Vite logo" })
+          ),
+          m(
+            "a",
+            { href: "https://www.typescriptlang.org", target: "_blank" },
+            m("img.vanilla", {
+              class: logoClass,
+              src: typescriptLogo,
+              alt: "TypeScript logo",
+            })
+          ),
+          m(
+            "a",
+            { href: "https://mithril.js.org", target: "_blank" },
+            m("img.logo", {
+              class: logoClass,
+              src: mithriljsLogo,
+              alt: "Mithril logo",
+            })
+          )
         ),
         m("h1", "Vite + Typescript + Mithril"),
         m("p.read-the-docs", "Click on the logos above to learn more"),
@@ -73,9 +91,9 @@ const App: m.ClosureComponent = () => {
   }
 }
 
-const mountNode = document.querySelector("#app")
-if (mountNode) {
+let _mountNode: Element | null = null
+export const AppRender = (mountNode: Element) => {
+  _mountNode = mountNode
   m.mount(mountNode, App)
+  setupCounter(document.querySelector<HTMLButtonElement>("#counter")!)
 }
-
-setupCounter(document.querySelector<HTMLButtonElement>("#counter")!)
