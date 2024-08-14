@@ -40,6 +40,7 @@ const App: m.ClosureComponent = () => {
       return m(
         "",
         m(Editor, { stateContainer: appState.editor }),
+        m("pre", JSON.stringify(appState, null, 2)),
         m(
           "",
           { class: "flex my-4" },
